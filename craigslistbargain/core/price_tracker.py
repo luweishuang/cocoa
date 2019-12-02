@@ -178,8 +178,8 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--train-examples-path', help='Path to training json file')
-    parser.add_argument('--output', help='Path to output model')
+    parser.add_argument('--train-examples-path', default='../data/train.json', help='Path to training json file')
+    parser.add_argument('--output',  default='../data/price_tracker.pkl', help='Path to output model')
     args = parser.parse_args()
 
     examples = read_json(args.train_examples_path)

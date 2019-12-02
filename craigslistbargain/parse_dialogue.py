@@ -6,13 +6,13 @@ from cocoa.model.manager import Manager
 from cocoa.analysis.utils import intent_breakdown
 from cocoa.io.utils import write_json
 
-from core.event import Event
-from core.scenario import Scenario
-from core.price_tracker import PriceTracker
-from neural.preprocess import Preprocessor
-from model.parser import Parser
-from model.dialogue_state import DialogueState
-from model.generator import Templates, Generator
+from craigslistbargain.core.event import Event
+from craigslistbargain.core.scenario import Scenario
+from craigslistbargain.core.price_tracker import PriceTracker
+from craigslistbargain.neural.preprocess import Preprocessor
+from craigslistbargain.model.parser import Parser
+from craigslistbargain.model.dialogue_state import DialogueState
+from craigslistbargain.model.generator import Templates, Generator
 
 def parse_example(example, lexicon, templates):
     """Parse example and collect templates.
@@ -25,7 +25,7 @@ def parse_example(example, lexicon, templates):
     for event in example.events:
         writing_agent = event.agent  # Speaking agent
         reading_agent = 1 - writing_agent
-        #print event.agent
+        #print(event.agent
 
         received_utterance = parsers[reading_agent].parse(event, states[reading_agent])
         if received_utterance:
@@ -37,8 +37,8 @@ def parse_example(example, lexicon, templates):
 
             templates.add_template(sent_utterance, states[writing_agent])
             parsed_utterances.append(received_utterance)
-            #print 'sent:', ' '.join(sent_utterance.template)
-            #print 'received:', ' '.join(received_utterance.template)
+            #print('sent:', ' '.join(sent_utterance.template)
+            #print('received:', ' '.join(received_utterance.template)
 
             # Update states
             states[reading_agent].update(writing_agent, received_utterance)
@@ -69,7 +69,7 @@ if __name__ == '__main__':
 
     #for d in parsed_dialogues[:2]:
     #    for u in d:
-    #        print u
+    #        print(u)
     #import sys; sys.exit()
 
     if args.transcripts_output:
@@ -91,5 +91,5 @@ if __name__ == '__main__':
     # Test model and generator
     generator = Generator(templates)
     action = manager.choose_action(None, context=('<start>', '<start>'))
-    print action
-    print generator.retrieve('<start>', context_tag='<start>', tag=action, category='car', role='seller').template
+    print(action)
+    print(generator.retrieve('<start>', context_tag='<start>', tag=action, category='car', role='seller').template)
